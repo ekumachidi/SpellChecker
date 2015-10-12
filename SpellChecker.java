@@ -16,11 +16,11 @@ public class SpellChecker {
  */
 	public static void main(String[] args) {
 //		Check that all required files are passed in
-//		if (args.length != 2) {
-//			System.out.println("You need to pass the document.txt and dictionary");
-//			System.out.println("Usage: $ java SpellChecker document.txt dictionary");
-//			System.exit(1);
-//		}
+		if (args.length != 2) {
+			System.out.println("You need to pass the document.txt and dictionary");
+			System.out.println("Usage: $ java SpellChecker document.txt dictionary");
+			System.exit(1);
+		}
 		File inputFile = null;
 		Scanner scan = null;
 		String docFile = args[0];
@@ -70,9 +70,9 @@ public class SpellChecker {
         }
         scan.close();
 	}
-	String dictionary = "dictionary.text";
-	String filename = "Words.txt";
-	String correctedDoc = "document-corrected.txt";
+//	String dictionary = "dictionary.text";
+//	String filename = "Words.txt";
+//	String correctedDoc = "document-corrected.txt";
 	
 	public static ArrayList<String> getWordsFromString(String s) {
         ArrayList<String> wordList = new ArrayList<String>();
@@ -93,7 +93,31 @@ public class SpellChecker {
         }
 
         return wordList;
+    }	
+}
+class LinearSearch {
+	private static ArrayList<String> wordList;
+
+    public LinearSearch() {
+        wordList = new ArrayList<String>();
     }
-	//	TO-DO: Accept working documents, Read them, and write a third.
-	
+
+    public static void addWord(String word) {
+        wordList.add(word.toLowerCase());
+    }
+
+    public boolean hasWord(String word) {
+        word = word.toLowerCase();
+
+        if (word.length() == 1) {
+            return true;
+        }
+
+        for (String wordFromDictionary : wordList) {
+            if (word.equals(wordFromDictionary)) {
+                return true;
+            }
+        }        
+        return false;
+    }
 }
