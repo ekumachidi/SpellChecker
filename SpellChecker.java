@@ -62,10 +62,11 @@ public class SpellChecker {
             String line = scan.nextLine();
             ArrayList<String> wordsInLine = getWordsFromString(line);
             for (String word : wordsInLine) {
-                if (!dictionary.hasWord(word)) {
+                LinearSearch dictionary = null;
+				if (!dictionary.hasWord(word)) {
                     System.out.format("[%d] %s\n", lineNumber, word);
                     try{
-            			String content = "";
+            			String content = word;
             			File file = new File("corrected.txt");
             			if (!file.exists()) {
             				file.createNewFile();
@@ -115,6 +116,7 @@ public class SpellChecker {
         return wordList;
     }	
 }
+
 class LinearSearch {
 	private static ArrayList<String> wordList;
 
