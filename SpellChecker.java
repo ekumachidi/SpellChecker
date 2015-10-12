@@ -61,11 +61,27 @@ public class SpellChecker {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             ArrayList<String> wordsInLine = getWordsFromString(line);
-//            for (String word : wordsInLine) {
-//                if (!dictionary.hasWord(word)) {
-//                    System.out.format("[%d] %s\n", lineNumber, word);
-//                }
-//            }
+            for (String word : wordsInLine) {
+                if (!dictionary.hasWord(word)) {
+                    System.out.format("[%d] %s\n", lineNumber, word);
+                    try{
+            			String content = "";
+            			File file = new File("corrected.txt");
+            			if (!file.exists()) {
+            				file.createNewFile();
+            			}
+            			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            			BufferedWriter bw = new BufferedWriter(fw);
+            			bw.write(content);
+            			bw.close();
+            			System.out.println("Done");
+            		}
+            		catch(IOException e)
+            		{
+            			e.printStackTrace();
+            		}
+                }
+            }
             lineNumber++;
         }
         scan.close();
@@ -73,7 +89,11 @@ public class SpellChecker {
 //	String dictionary = "dictionary.text";
 //	String filename = "Words.txt";
 //	String correctedDoc = "document-corrected.txt";
-	
+	/**
+	 * Splits the specified string into words, discarding punctuation and spacing.
+	 * @param s the string to be split
+	 * @return an ArrayList of the resulting words
+	 */
 	public static ArrayList<String> getWordsFromString(String s) {
         ArrayList<String> wordList = new ArrayList<String>();
         String word = "";
